@@ -1,0 +1,68 @@
+# Permite reescribir las peticiones de URL
+RewriteEngine On
+
+# Si el archivo y la carpeta no existen hacer siguiente reescritura
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# elimina el uso extricto del .php 
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+
+# compresion de cargas
+# comprobar cache con el server y si es diferente se descarga sino no
+# Desactivar el Last-Modified
+
+# SetOutputFilter DEFLATE
+# Header unset ETag
+# FileETag None
+# <FilesMatch "\.(js|css|ico|pdf|jpg|jpeg|png|gif|x-icon|icon|swf|flv)$">
+# Header set Cache-Control "max-age=604800, public"
+# Header unset Last-Modified
+# </FilesMatch>
+
+# Crea paginas personalizadas para errores
+ErrorDocument 404 /c/404.php
+
+# bloquear el acceso desde direcciones IP
+# <limit GET POST PUT>
+# Order deny,allow 
+# Allow form all
+# Deny from 172.31.107.00
+# </LIMIT>
+
+# desabilitar la navegacion por los directorios del servidor
+# Options All -indexes
+
+# Mejorar velocidad de carga
+# FileEtag MTime Size
+# ExpiresActive on
+# ExpiresDefault "acces plus 28800 seconds"
+
+# proteger archivos conecion.php
+# <files coneccion.php>
+# order allow,deny
+# deny from all
+# </files>
+
+# autocorregir errores ortograficos de enlaces
+# <IfModule mod_speling.c>
+# CheckSpelling On
+# </IfModule>
+
+# Asegurar librerias
+# <Files ~ ".(js|css)$">
+# order allow, deny
+# allow from all
+# </Files>
+
+# Redireccionar a pagina www sin el
+# RewriteEngine On
+# RewriteBase /
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+# desactivar msj de errores del servidor 
+# php_flag display_startup_errors off
+# php_flag display_errors off
+# php_flag html_errors off
+
